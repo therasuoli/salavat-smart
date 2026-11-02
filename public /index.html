@@ -1,1 +1,107 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#063d32">
+  <meta name="description" content="صلوات‌شمار هوشمند؛ ذکر روزانه، آمار و ختم شخصی و گروهی">
+  <title>صلوات‌شمار هوشمند</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon-192.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/config.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="صفحه اصلی">
+        <span class="brand-mark">ﷺ</span>
+        <span><b>صلوات‌شمار هوشمند</b><small>ذکر امروز، آرامش هر روز</small></span>
+      </a>
+      <div class="top-actions">
+        <button id="themeBtn" class="icon-btn" aria-label="تغییر پوسته" title="تغییر پوسته">◐</button>
+        <button id="installBtn" class="outline-btn hidden">نصب برنامه</button>
+      </div>
+    </header>
 
+    <main>
+      <section class="welcome">
+        <div><span class="eyebrow">به نام خداوند مهربان</span><h1>لحظه‌ای برای ذکر و آرامش</h1>
+        <p>با هر صلوات، قدمی کوچک در مسیر نور بردارید.</p></div>
+        <div class="date-chip" id="todayLabel">امروز</div>
+      </section>
+
+      <section class="grid-main">
+        <article class="panel counter-panel">
+          <div class="panel-head">
+            <div><span class="eyebrow">ذکر انتخاب‌شده</span>
+              <select id="dhikrSelect" aria-label="انتخاب ذکر">
+                <option value="salavat">صلوات بر محمد و آل محمد</option>
+                <option value="istighfar">استغفرالله ربی و اتوب الیه</option>
+                <option value="tasbih">سبحان‌الله</option>
+                <option value="hamd">الحمدلله</option>
+              </select>
+            </div>
+            <span class="live-dot">ذخیره خودکار</span>
+          </div>
+          <div class="arabic" id="arabicText">اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَآلِ مُحَمَّدٍ</div>
+          <div class="translation" id="translationText">خدایا بر محمد و خاندان محمد درود فرست.</div>
+          <button class="count-ring" id="countBtn" aria-label="ثبت یک ذکر">
+            <span class="count-label">تعداد امروز</span><strong id="countValue">۰</strong><span class="tap-hint">برای ثبت لمس کنید</span>
+          </button>
+          <div class="counter-actions">
+            <button id="undoBtn" class="soft-btn">↶ بازگشت</button>
+            <button id="resetBtn" class="soft-btn danger">صفر کردن امروز</button>
+            <button id="speakBtn" class="soft-btn">◖ پخش ذکر</button>
+          </div>
+          <div class="goal-block">
+            <div class="goal-line"><span>هدف روزانه</span><b id="goalText">۱۰۰ / ۰</b></div>
+            <div class="progress"><span id="goalProgress"></span></div>
+            <div class="goal-edit"><label for="goalInput">تغییر هدف</label><input id="goalInput" type="number" min="1" max="1000000" value="100"><button id="saveGoalBtn" class="mini-btn">ثبت</button></div>
+          </div>
+        </article>
+
+        <aside class="side-stack">
+          <article class="panel stat-card"><span class="eyebrow">مجموع ذکرهای شما</span><strong id="totalValue">۰</strong><small>از ابتدای استفاده</small></article>
+          <article class="panel stat-card"><span class="eyebrow">روزهای فعال</span><strong id="activeDays">۱</strong><small>روزهایی که ذکر ثبت کرده‌اید</small></article>
+          <article class="panel global-card"><span class="eyebrow">مشارکت جهانی صلوات</span><strong id="globalValue">—</strong><small id="globalStatus">پس از اتصال سرویس ابری نمایش داده می‌شود</small></article>
+          <article class="panel audio-card"><div><b>ذکر با صوت</b><p>از صدای عربی موجود در دستگاه استفاده می‌شود.</p></div><label class="switch"><input id="audioToggle" type="checkbox" checked><span></span></label></article>
+        </aside>
+      </section>
+
+      <section class="lower-grid">
+        <article class="panel"><div class="section-title"><div><span class="eyebrow">گزارش شما</span><h2>آمار و تاریخچه</h2></div><button id="exportBtn" class="outline-btn">خروجی JSON</button></div>
+          <div class="stats-row"><div><small>امروز</small><b id="todayStat">۰</b></div><div><small>دیروز</small><b id="yesterdayStat">۰</b></div><div><small>میانگین روزانه</small><b id="averageStat">۰</b></div></div>
+          <div id="historyList" class="history-list"></div>
+        </article>
+        <article class="panel"><span class="eyebrow">با هم در مسیر خیر</span><h2>ختم گروهی</h2>
+          <p class="muted">یک ختم بسازید یا با کد دعوت دوستانتان به ختم بپیوندید. برای استفاده ابری باید وارد حساب شوید.</p>
+          <div class="auth-row"><input id="username" autocomplete="username" placeholder="نام کاربری"><input id="password" type="password" autocomplete="current-password" placeholder="گذرواژه"></div>
+          <div class="button-row"><button id="registerBtn" class="primary-btn">ثبت‌نام</button><button id="loginBtn" class="outline-btn">ورود</button><button id="logoutBtn" class="soft-btn hidden">خروج</button></div>
+          <p id="authStatus" class="status-text">شمارش محلی بدون حساب نیز فعال است.</p>
+          <div class="divider"></div>
+          <div class="group-actions"><input id="groupName" placeholder="نام ختم"><button id="createGroupBtn" class="primary-btn">ساخت ختم</button></div>
+          <div class="group-actions"><input id="inviteCode" placeholder="کد دعوت"><button id="joinGroupBtn" class="outline-btn">پیوستن</button></div>
+          <div id="groupList" class="group-list"></div>
+        </article>
+      </section>
+
+      <section class="panel settings-panel">
+        <div class="section-title"><div><span class="eyebrow">تنظیمات و ابزارها</span><h2>مدیریت برنامه</h2></div></div>
+        <div class="settings-grid">
+          <button id="backupBtn" class="setting-tile"><b>پشتیبان‌گیری</b><small>ذخیره اطلاعات در فایل JSON</small></button>
+          <label class="setting-tile import-tile"><b>بازیابی اطلاعات</b><small>انتخاب فایل پشتیبان JSON</small><input id="importFile" type="file" accept="application/json"></label>
+          <button id="updateBtn" class="setting-tile"><b>بررسی به‌روزرسانی</b><small>بررسی نسخه جدید برنامه</small></button>
+          <button id="helpBtn" class="setting-tile"><b>راهنما و درباره</b><small>نسخه ۲.۰.۰ · ساخته‌شده برای ذکر روزانه</small></button>
+        </div>
+      </section>
+    </main>
+    <footer>صلوات‌شمار هوشمند <span>•</span> یادآور ذکر، نه جایگزین نیت و حضور قلب</footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="installPrompt" class="modal hidden"><div class="modal-card"><button class="modal-close" data-close="installPrompt">×</button><div class="modal-icon">⬇</div><h3>صلوات‌شمار را نصب کنید</h3><p>برای دسترسی سریع‌تر و استفاده شبیه برنامه، آن را به صفحه اصلی اضافه کنید.</p><div class="button-row"><button id="confirmInstall" class="primary-btn">نصب برنامه</button><button class="soft-btn" data-close="installPrompt">بعداً</button></div></div></div>
+  <div id="infoModal" class="modal hidden"><div class="modal-card"><button class="modal-close" data-close="infoModal">×</button><h3 id="infoTitle">راهنما</h3><p id="infoBody"></p><button class="primary-btn" data-close="infoModal">متوجه شدم</button></div></div>
+  <script src="/app.js"></script>
+</body>
+</html>
