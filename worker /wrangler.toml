@@ -1,0 +1,23 @@
+name = "salavat-smart-api"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://YOUR-PAGES-PROJECT.pages.dev"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "salavat-smart-db"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[[r2_buckets]]
+binding = "AUDIO"
+bucket_name = "salavat-audio"
+
+[[durable_objects.bindings]]
+name = "GLOBAL_COUNTER"
+class_name = "GlobalCounter"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["GlobalCounter"]
